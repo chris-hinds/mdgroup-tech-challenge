@@ -1,30 +1,20 @@
-import React, { useEffect } from "react";
+import React from "react";
 
-// Redux
-import { useDispatch, useSelector } from "react-redux";
+// Routing
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-// Actions
-import fetchDataAction from "./store/Middleware/fetchData";
-import { getData, getDataPending, getDataError } from "./store/Reducers";
+// Pages
+import HomePage from "./pages/home";
+import BreedGroup from "./pages/breedGroup";
 
 const App = () => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchDataAction("https://dog.ceo/api/breeds/list/all"));
-  }, []);
-
-  const data = useSelector((state) => getData(state));
-
   return (
-    <div className="App">
-      <h1>Doggy McDogface</h1>
-      <div>
-        {data &&
-          Object.keys(data).map((value) => {
-            return <li>{value}</li>;
-          })}
-      </div>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/breed-group/:id" element={<BreedGroup />} />
+      </Routes>
+    </BrowserRouter>
   );
 };
 
