@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // Actions
-import fetchDataAction from "../../store/Middleware/fetchData";
+import fetchDataAction from "../../store/Middleware/fetchAllData";
 import { getData, getDataPending, getDataError } from "../../store/Reducers";
 
 // Routing
@@ -12,12 +12,18 @@ import { Link } from "react-router-dom";
 
 const HomePage = () => {
   const dispatch = useDispatch();
+  const data = useSelector((state) => getData(state));
 
   useEffect(() => {
-    dispatch(fetchDataAction("https://dog.ceo/api/breeds/list/all"));
-  }, []);
-
-  const data = useSelector((state) => getData(state));
+    console.log(data);
+    if (!data) {
+      dispatch(
+        fetchDataAction(
+          `${process.env.REACT_APP_API_BASE_PATH}/breeds/list/all`
+        )
+      );
+    }
+  }, [data]);
 
   return (
     <div>

@@ -4,27 +4,41 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // Actions
-import fetchDataAction from "../../store/Middleware/fetchData";
-import { getData, getDataPending, getDataError } from "../../store/Reducers";
+import fetchBreedImages from "../../store/Middleware/fetchBreedImages";
+
+import {
+  getBreedGroup,
+  getBreedImages,
+  getDataPending,
+  getDataError,
+} from "../../store/Reducers";
 
 // Routing
 import { useLocation, useParams } from "react-router-dom";
 
-const BreedGroupPage = (props) => {
+const renderImages = (images) => images.map((image) => <img src={image} />);
+
+const BreedGroupPage = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
-  const location = useLocation();
+
+  const breedGroupData = useSelector((state) => getBreedGroup(state, id));
+  const breedGroupImages = useSelector((state) => getBreedImages(state, id));
 
   useEffect(() => {
-    // dispatch(fetchDataAction("https://dog.ceo/api/breeds/list/all"));
-  }, []);
-
-  // const breedGroupData = useSelector((state) => state[id]);
+    console.log("---------------" + breedGroupImages);
+    if (!breedGroupImages) {
+      console.log("fetching images");
+      dispatch(
+        fetchBreedImages(`https://dog.ceo/api/breed/${id}/images/random/3`, id)
+      );
+    }
+  }, [breedGroupData]);
 
   return (
     <div>
-      <h2>Hello</h2>
-      {JSON.stringify(location)}
+      <h2>{id}</h2>
+      {breedGroupImages && renderImages(breedGroupImages)}
     </div>
   );
 };
