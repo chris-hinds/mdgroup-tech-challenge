@@ -4,6 +4,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // Actions
+import fetchDataAction from "../../store/Middleware/fetchAllData";
 import fetchBreedImages from "../../store/Middleware/fetchBreedImages";
 
 import {
@@ -27,11 +28,21 @@ const BreedGroupPage = () => {
   const breedGroupImages = useSelector((state) => getBreedImages(state, id));
 
   useEffect(() => {
+    if (!breedGroupData) {
+      dispatch(
+        fetchDataAction(
+          `${process.env.REACT_APP_API_BASE_PATH}/breeds/list/all`
+        )
+      );
+    }
+  }, []);
+
+  useEffect(() => {
     // Only fetch images on render if data doesnt already exist
     if (!breedGroupImages) {
       dispatch(fetchBreedImages(breedImagesUrl, id));
     }
-  }, []);
+  }, [breedGroupData]);
 
   return (
     <div>
@@ -39,6 +50,7 @@ const BreedGroupPage = () => {
       <button onClick={() => dispatch(fetchBreedImages(breedImagesUrl, id))}>
         Refresh Images
       </button>
+      {JSON.stringify(breedGroupImages)}
       {breedGroupImages && renderImages(breedGroupImages)}
     </div>
   );

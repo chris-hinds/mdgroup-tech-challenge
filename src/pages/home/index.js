@@ -15,7 +15,7 @@ const HomePage = () => {
   const data = useSelector((state) => getData(state));
 
   useEffect(() => {
-    console.log(data);
+    // Onlt fetch all breed data if it doesnt already exist e.g. on a page refresh. We could implement persistent storage to get around this issue
     if (!data) {
       dispatch(
         fetchDataAction(
@@ -23,7 +23,7 @@ const HomePage = () => {
         )
       );
     }
-  }, [data]);
+  }, []);
 
   return (
     <div>

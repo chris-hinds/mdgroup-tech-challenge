@@ -64,7 +64,7 @@ const reducer = createReducer(initialState, {
 
 // Selectors
 export const getData = (state) => state.data;
-export const getBreedGroup = (state, id) => state.data[id];
+export const getBreedGroup = (state, id) => R.path(["data", id], state);
 export const getBreedImages = (state, id) =>
   R.path(["data", id, "images"], state);
 export const getDataPending = (state) => state.pending;

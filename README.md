@@ -7,6 +7,7 @@
 - [x] Persist data whilst moving back to home and back to the same breed
 - [x] Ensure App URL updates during navigation
 - [x] Fetch 3 new images if the user refreshes the breed page and remove the old images
+- [x] Fetch all required data if landing on `/breed-group/<breed>` without navigating to it from the main page
 - [ ] Implement global app layout
 - [ ] Style the App
 - [x] Add image refresh button
