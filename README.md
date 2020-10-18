@@ -9,4 +9,5 @@
 - [x] Fetch 3 new images if the user refreshes the breed page and remove the old images
 - [ ] Implement global app layout
 - [ ] Style the App
-- [ ] Add image refresh button
+- [x] Add image refresh button
+- [ ] Display all bree names in a group on the breed page

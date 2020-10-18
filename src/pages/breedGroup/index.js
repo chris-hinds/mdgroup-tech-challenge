@@ -21,23 +21,24 @@ const renderImages = (images) => images.map((image) => <img src={image} />);
 const BreedGroupPage = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
+  const breedImagesUrl = `${process.env.REACT_APP_API_BASE_PATH}/breed/${id}/images/random/3`;
 
   const breedGroupData = useSelector((state) => getBreedGroup(state, id));
   const breedGroupImages = useSelector((state) => getBreedImages(state, id));
 
   useEffect(() => {
-    console.log("---------------" + breedGroupImages);
+    // Only fetch images on render if data doesnt already exist
     if (!breedGroupImages) {
-      console.log("fetching images");
-      dispatch(
-        fetchBreedImages(`https://dog.ceo/api/breed/${id}/images/random/3`, id)
-      );
+      dispatch(fetchBreedImages(breedImagesUrl, id));
     }
-  }, [breedGroupData]);
+  }, []);
 
   return (
     <div>
       <h2>{id}</h2>
+      <button onClick={() => dispatch(fetchBreedImages(breedImagesUrl, id))}>
+        Refresh Images
+      </button>
       {breedGroupImages && renderImages(breedGroupImages)}
     </div>
   );
