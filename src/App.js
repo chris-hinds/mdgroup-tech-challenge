@@ -10,17 +10,20 @@ import { getData, getDataPending, getDataError } from "./store/Reducers";
 const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchDataAction());
+    dispatch(fetchDataAction("https://dog.ceo/api/breeds/list/all"));
   }, []);
 
-  // const dispatch = useDispatch({ type: "FETCH_DATA_PENDING" });
-
-  const data = useSelector((state) => state.data);
-  console.log(data);
+  const data = useSelector((state) => getData(state));
 
   return (
     <div className="App">
       <h1>Doggy McDogface</h1>
+      <div>
+        {data &&
+          Object.keys(data).map((value) => {
+            return <li>{value}</li>;
+          })}
+      </div>
     </div>
   );
 };

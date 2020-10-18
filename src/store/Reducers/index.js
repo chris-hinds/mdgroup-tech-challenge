@@ -23,7 +23,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         pending: false,
-        data,
+        data: data.message,
       };
     case FETCH_DATA_ERROR:
       return {
