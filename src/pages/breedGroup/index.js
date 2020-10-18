@@ -47,6 +47,10 @@ const BreedGroupPage = () => {
   return (
     <div>
       <h2>{id}</h2>
+      <h3>
+        {breedGroupData &&
+          breedGroupData.breedGroup.map((breed) => <span>{breed}</span>)}
+      </h3>
       <button onClick={() => dispatch(fetchBreedImages(breedImagesUrl, id))}>
         Refresh Images
       </button>

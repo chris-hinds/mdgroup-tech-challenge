@@ -37,7 +37,7 @@ const HomePage = () => {
               >
                 {value}
               </Link>
-              {JSON.stringify(data[value])}
+              No of breeds in group: {data[value].breedGroup.length}
             </li>
           );
         })}

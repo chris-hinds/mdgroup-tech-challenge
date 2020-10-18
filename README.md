@@ -11,4 +11,5 @@
 - [ ] Implement global app layout
 - [ ] Style the App
 - [x] Add image refresh button
-- [ ] Display all bree names in a group on the breed page
+- [ ] Display No' of breeds in the group on the home screen
+- [x] Display all breed names in a group on the breed page
