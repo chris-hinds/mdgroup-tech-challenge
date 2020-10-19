@@ -1,11 +1,13 @@
 // Redux
 import { createReducer } from "@reduxjs/toolkit";
 
+/*eslint no-unused-vars: "off"*/
 import {
   FETCH_DATA_PENDING,
   FETCH_DATA_SUCCESS,
   FETCH_DATA_ERROR,
   FETCH_BREED_IMAGES_SUCCESS,
+  FILTER_BREEDS,
 } from "../Actions";
 
 // Utils
@@ -59,12 +61,15 @@ const reducer = createReducer(initialState, {
 
     const breedGroup = state.data[id];
     breedGroup.images = data.message;
+    state.pending = false;
   },
 });
 
 // Selectors
 export const getData = (state) => state.data;
 export const getBreedGroup = (state, id) => R.path(["data", id], state);
+export const getSubBreeds = (state, id) =>
+  R.path(["data", id, "breedGroup"], state);
 export const getBreedImages = (state, id) =>
   R.path(["data", id, "images"], state);
 export const getDataPending = (state) => state.pending;
