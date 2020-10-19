@@ -24,4 +24,4 @@ yarn install && yarn start
 
 ## Extras
 
-I had a (sort or) workinmg version on filtering the list of breeds, however ran into a slight issue so decided to remove it. I'd like to dscuss this part with you.
+I had a (sort or) working version on filtering the list of breeds, however ran into a slight issue so decided to remove it. I'd like to dscuss this part with you.
